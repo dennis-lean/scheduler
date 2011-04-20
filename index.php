@@ -1,7 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<link type="text/css" rel="stylesheet" href="design.css" />
-		<script type="text/javascript" src="design.js" />
+		<link type="text/css" rel="stylesheet" href="style.css" />
+		<script type="text/javascript" src="jquery-1.4.1.min.js" />
+		<script type="text/javascript" src="scheduler.js" />
 	</head>
 	<body>
 		<?php $pilots = array('Mior Muhammad Zaki', 'Chan'); ?>
