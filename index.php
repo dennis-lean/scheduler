@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<link type="text/css" rel="stylesheet" href="style.css" />
-		<script type="text/javascript" src="jquery-1.4.1.min.js"></script>
-		<script type="text/javascript" src="scheduler.js"></script>
+		<script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
+		<script type="text/javascript" src="js/scheduler.js"></script>
 	</head>
 	<body>
 		<?php $pilots = array('Mior Muhammad Zaki', 'Chan'); ?>
@@ -11,24 +11,25 @@
 			<colgroup id="colgroup-pilot"></colgroup>
 			<colgroup id="colgroup-date" span="30" class="colgroup-date"></colgroup>
 			<thead>
-				<tr>
+				<tr id="dataset-months">
 					<th></th>
-					<?php for($i = 1; $i <= 30; $i++) : ?>
-						<th><?php echo $i; ?></th>
-					<?php endfor; ?>
+				</tr>
+				<tr id="dataset-days">
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($pilots as $pilot) : ?>
-				<tr>
+				<tr class="dataset-datum">
 					<th><?php echo $pilot; ?></th>
-					<?php for($i = 1; $i <= 30; $i++) : ?>
-						<td scope="colgroup">&nbsp;</td>
-					<?php endfor; ?>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
-		
+		<script type="text/javascript">
+		jQuery(function($) {
+			Scheduler.initiate(3, '<?php echo date('Y-m-d'); ?>');
+		});
+		</script>
 	</body>
 </html>
