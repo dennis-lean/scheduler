@@ -7,9 +7,9 @@ var Scheduler = {
 		days: null,
 		datum: null
 	},
-	monthName: ['Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+	monthName: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	
-	initiate: function(totalMonths, today) {
+	initiate: function(title, totalMonths, today) {
 		
 		this.dataset.months = $('#dataset-months');
 		this.dataset.days = $('#dataset-days');
@@ -43,8 +43,10 @@ var Scheduler = {
 		
 		var loopMonth = firstDate.getMonth() - 1;
 		
-		$('table').css('width', 250 + (19 * totalTime) + 'px');
+		$('#scheduler').css('width', 250 + (21 * totalTime) + 'px');
 		$('#colgroup-date').attr('span', totalTime);
+		
+		var contents = '';
 		
 		for (var i = 0; i < totalTime; i++) {
 			var loopTime = (firstDate.getTime() + (i * this.dayOffset));
@@ -59,8 +61,19 @@ var Scheduler = {
 			}
 			
 			$('<th/>').text(loopDate.getDate()).appendTo(this.dataset.days);
-			$('.dataset-datum').append('<td/>');
+			contents += '<td data-month="' + loopDate.getMonth() + '" data-date="' + loopDate.getDate() + '">&nbsp;</td>';
 		}
+		
+		console.log(title, title.length);
+		
+		for(var i = 0, length = title.length; i < length; i++) {
+			var tr = $('<tr />').appendTo('#scheduler tbody');
+			tr.append('<th>' + title[i] + '</th>' + contents);
+		}
+		
+		$('.dataset-datum').bind('click', function() {
+			console.log('clicked');
+		});
 		
 	}
 };

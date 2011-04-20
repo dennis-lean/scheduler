@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>Scheduler</title>
 		<link type="text/css" rel="stylesheet" href="style.css" />
 		<script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
 		<script type="text/javascript" src="js/scheduler.js"></script>
 	</head>
 	<body>
-		<?php $pilots = array('Mior Muhammad Zaki', 'Chan'); ?>
-		<table>
+		<table id="scheduler">
 			<colgroup id="colgroup-pilot"></colgroup>
-			<colgroup id="colgroup-date" span="30" class="colgroup-date"></colgroup>
+			<colgroup id="colgroup-date" class="colgroup-date"></colgroup>
 			<thead>
 				<tr id="dataset-months">
 					<th></th>
@@ -18,17 +18,13 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>
-				<?php foreach($pilots as $pilot) : ?>
-				<tr class="dataset-datum">
-					<th><?php echo $pilot; ?></th>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
+			<tbody></tbody>
 		</table>
 		<script type="text/javascript">
 		jQuery(function($) {
-			Scheduler.initiate(3, '<?php echo date('Y-m-d'); ?>');
+			var users = ['Mior Muhammad Zaki', 'crynobone', 'Miki', 'Aesha'];
+			
+			Scheduler.initiate(users, 3, '2010-04-20');
 		});
 		</script>
 	</body>
