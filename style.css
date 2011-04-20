@@ -1,0 +1,33 @@
+
+root, body { 
+    display: block;
+	font-family: Lucida Grande,Lucida Sans Unicode,sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+	overflow: scroll;
+}
+
+table thead {
+	background: #eee;
+}
+table thead th {
+	font-weight: normal;
+	font-size: 10px;
+}
+
+table tbody th {
+	text-align: left;
+	font-weight: normal;
+	width: 250px;
+}
+
+table tbody td {
+	width: 19px;
+	
+}
+
+.colgroup-date {
+	background: url('img/timeline.png') repeat scroll 0 0;
+}
