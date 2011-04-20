@@ -64,8 +64,6 @@ var Scheduler = {
 			contents += '<td data-month="' + loopDate.getMonth() + '" data-date="' + loopDate.getDate() + '">&nbsp;</td>';
 		}
 		
-		console.log(title, title.length);
-		
 		for(var i = 0, length = title.length; i < length; i++) {
 			var tr = $('<tr />').appendTo('#scheduler tbody');
 			tr.append('<th>' + title[i] + '</th>' + contents);
