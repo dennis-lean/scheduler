@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<link type="text/css" rel="stylesheet" href="style.css" />
-		<script type="text/javascript" src="jquery-1.4.1.min.js" />
-		<script type="text/javascript" src="scheduler.js" />
+		<script type="text/javascript" src="jquery-1.4.1.min.js"></script>
+		<script type="text/javascript" src="scheduler.js"></script>
 	</head>
 	<body>
 		<?php $pilots = array('Mior Muhammad Zaki', 'Chan'); ?>
