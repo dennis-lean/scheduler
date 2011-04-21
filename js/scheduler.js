@@ -81,12 +81,10 @@ var Scheduler = {
 			'url': uri,
 			'data': data,
 			'complete': function(xhr) {
-				console.log(xhr.status, xhr);
 				var data = jQuery.parseJSON(xhr.responseText);
-				console.log(data);
+				
 				switch (xhr.status) {
 					case 200:
-						console.log(data);
 						callback(data);
 						break;
 				}
