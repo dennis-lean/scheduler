@@ -1,3 +1,36 @@
+var Utility = {
+	// Check if data is not defined
+	isnull: function(value) {
+		return (typeof(value) == 'undefined' || value == null);
+	},
+        
+	// Check if data is defined
+	isset: function(value) {
+		return !this.isnull(value);
+	},
+        
+	// Check whether the passed value is a function
+	isfunction: function(value) {
+		return this.typeOf(value, 'function');
+	},
+
+
+	// Return the typeof passed argument, extending JavaScript default typeof
+	typeOf: function(data, type) {
+		var _this = this;
+		var result = (function(data) {
+			if (_this.isnull(data)) 
+				return null;
+			else {
+				var value = Object.prototype.toString.call(data).match(/(\w+)\]/)[1];
+				return (value == 'HTMLDocument' ? 'element' : value.toLowerCase());
+			}
+		})(data);
+                
+		return (_this.isset(type) ? (result === type.toLowerCase()) : result);
+	}
+};
+
 var Scheduler = {
 	localData: {},
 	todayDate: null,
@@ -7,12 +40,62 @@ var Scheduler = {
 		days: null,
 		datum: null
 	},
+	
 	monthName: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	
-	initiate: function(title, totalMonths, today) {
-		
+	initiate: function() {
 		this.dataset.months = $('#dataset-months');
 		this.dataset.days = $('#dataset-days');
+	},
+	
+	fetch: function(curl, data, callback, dataType) {
+		if (!Utility.isfunction(callback)) {
+			return;
+		}
+		
+		if (dataType == undefined) {
+			dataType = 'json';
+		}
+		
+		var request = curl.split(' ');
+		var type = 'GET';
+		var uri = '';
+
+		var types = ['POST', 'GET', 'PUT', 'DELETE'];
+
+		if (request.length == 1) {
+			uri = curl;
+		}
+		else {
+			request[0] = request[0];
+			if (jQuery.inArray(request[0], types) >= 0) {
+				type = request[0];
+			}
+
+			uri = request[1];
+		}
+
+		jQuery.ajax({
+			'type': type,
+			'dataType': dataType,
+			'url': uri,
+			'data': data,
+			'complete': function(xhr) {
+				console.log(xhr.status, xhr);
+				var data = jQuery.parseJSON(xhr.responseText);
+				console.log(data);
+				switch (xhr.status) {
+					case 200:
+						console.log(data);
+						callback(data);
+						break;
+				}
+			}
+		});
+		
+	},
+	
+	generate: function(data, totalMonths, today) {
 		
 		if (isNaN(totalMonths)) {
 			totalMonths = 4;
@@ -46,7 +129,12 @@ var Scheduler = {
 		$('#scheduler').css('width', 250 + (21 * totalTime) + 'px');
 		$('#colgroup-date').attr('span', totalTime);
 		
-		var contents = '';
+		var contents = [];
+		var length = data.length;
+		
+		for(var i = 0; i < length; i++) {
+			contents[i] = '';
+		}
 		
 		for (var i = 0; i < totalTime; i++) {
 			var loopTime = (firstDate.getTime() + (i * this.dayOffset));
@@ -61,12 +149,15 @@ var Scheduler = {
 			}
 			
 			$('<th/>').text(loopDate.getDate()).appendTo(this.dataset.days);
-			contents += '<td data-month="' + loopDate.getMonth() + '" data-date="' + loopDate.getDate() + '">&nbsp;</td>';
+			
+			for (var index = 0; index < length; index++) {
+				contents[index] += '<td data-month="' + loopDate.getMonth() + '" data-date="' + loopDate.getDate() + '" data-index="' + data[index].id + '">&nbsp;</td>';
+			}
 		}
 		
-		for(var i = 0, length = title.length; i < length; i++) {
+		for(var i = 0; i < length; i++) {
 			var tr = $('<tr />').appendTo('#scheduler tbody');
-			tr.append('<th>' + title[i] + '</th>' + contents);
+			tr.append('<th>' + data[i].name + '</th>' + contents[i]);
 		}
 		
 		$('.dataset-datum').bind('click', function() {

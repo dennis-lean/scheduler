@@ -24,7 +24,9 @@
 		jQuery(function($) {
 			var users = ['Mior Muhammad Zaki', 'crynobone', 'Miki', 'Aesha'];
 			
-			Scheduler.initiate(users, 3, '2010-04-20');
+			Scheduler.initiate();
+			
+			Scheduler.fetch('POST json/user.php', {}, function(data) { Scheduler.generate(data, 3, '2010-04-20'); });
 		});
 		</script>
 	</body>
