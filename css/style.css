@@ -1,0 +1,59 @@
+
+root, body { 
+    display: block;
+	margin: 0;
+	padding: 0;
+	font-family: Lucida Grande,Lucida Sans Unicode,sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100000px;
+	margin: 0;
+	padding: 0;
+}
+
+table thead {
+	background: #eee;
+}
+table thead th {
+	font-weight: normal;
+	font-size: 10px;
+}
+
+table thead #dataset-months th {
+	text-align: left;
+	text-indent: 10px;
+}
+
+table tbody th {
+	text-align: left;
+	font-weight: normal;
+	width: 250px;
+}
+
+table tbody td {
+	padding: 0;
+	margin: 0;
+	width: 21px;
+	
+}
+
+.colgroup-date {
+	background: url('../img/timeline.png') repeat scroll 0 0;
+}
+
+@media print {
+	body { }
+	.no-print { display: none; }
+	h1, h2, h3, h4, h5, h6 { page-break-after:avoid; page-break-inside: avoid; }
+	table thead #dataset-months th { page-break-after: always; }
+	img { page-break-inside:avoid; page-break-after:avoid; }
+	blockquote, table, pre { page-break-inside: avoid; }
+	ul, ol, dl  { page-break-before: avoid; }
+}
+
+@page figures {
+	size: landscape;
+	margin: 10px;
+}
